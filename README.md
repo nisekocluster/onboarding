@@ -1,15 +1,17 @@
 # Niseko Village — Onboarding Book
 
-Digital welcome book for the winter team. 38 pages, 10 languages.
+Digital welcome book for the winter team. 44 pages (43 on mobile and tablet),
+10 languages.
 
 **Everything is inside `index.html`**: the structure, the styles, the logic and
-the text for all 10 languages. Only the images are separate, in `img/`.
+the text for all 10 languages. Only the images (`img/`) and the flag font
+(`fonts/`) are separate.
 
 There is nothing to compile. No npm, no build, no dependencies.
 
 ```
 niseko-onboarding/
-├── index.html      ← EVERYTHING is here (161 KB)
+├── index.html      ← EVERYTHING is here (313 KB)
 ├── favicon.ico
 ├── fonts/          ← the flag font (for Windows)
 └── img/            ← the photos and maps
@@ -28,7 +30,7 @@ you still want one: `python3 -m http.server 8000`.)
 
 ## How to find your way around the file
 
-`index.html` has about 3,200 lines, so you don't navigate it by reading: you
+`index.html` has about 3,800 lines, so you don't navigate it by reading: you
 navigate it by searching. Open the file and use **Ctrl+F** (Cmd+F on Mac) with
 these markers:
 
@@ -239,6 +241,23 @@ The only customized part is the look of the closed box: the native arrow was
 removed (`appearance: none`) and one was drawn by hand with
 `.lang-select-wrap::after`. If you change the color or size of the box, remember
 that this arrow is a separate element, not part of the `<select>`.
+
+The open list has its own colors (`.lang-select option`): white text on dark
+blue. Don't remove them: Windows draws the list on a white background and the
+options would inherit the white text from the `<select>`, making them invisible.
+
+### The flags
+
+The language flags are emoji, and Windows has no flags in its emoji font: it
+shows letters instead ("GB", "JP"). That is why `fonts/TwemojiCountryFlags.woff2`
+is loaded with `@font-face` in `SECCION: COLORES`. Thanks to `unicode-range` it
+only applies to flags, so the rest of the text is unaffected. If you upload the
+site, include the `fonts/` folder. The graphics are from Twemoji, licensed under
+CC-BY 4.0.
+
+In the language menu at the top right, Burmese and Vietnamese show the flag above
+the name, because their names don't fit on one line next to it
+(`.langmenu__item--stacked`).
 
 Technical note: the decorative background (`.welcome__aurora`) uses
 `position: fixed` instead of `absolute` on purpose: if it goes back to

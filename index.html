@@ -100,6 +100,16 @@
      SECCION: COLORES
      Cambia aqui los colores y las tipografias de todo el libro.
      ========================================================================= */
+  /* Banderas: Windows no trae banderas en su fuente de emojis y muestra letras
+     ("GB", "JP"). Esta fuente solo se usa para las banderas (unicode-range).
+     Graficos de Twemoji, licencia CC-BY 4.0: github.com/jdecked/twemoji */
+  @font-face {
+    font-family: "Twemoji Country Flags";
+    src: url("fonts/TwemojiCountryFlags.woff2") format("woff2");
+    unicode-range: U+1F1E6-1F1FF;
+    font-display: swap;
+  }
+
   :root {
     --paper:      #f8f5ef;
     --paper-edge: #ece6da;
@@ -111,7 +121,7 @@
     --red:        #b03a2b;
 
     --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-    --font-body: "Lato", "Noto Sans JP", "Noto Sans Thai", "Noto Sans Myanmar",
+    --font-body: "Twemoji Country Flags", "Lato", "Noto Sans JP", "Noto Sans Thai", "Noto Sans Myanmar",
                  "Noto Sans Devanagari", "Hiragino Sans", "Yu Gothic",
                  system-ui, -apple-system, sans-serif;
 
@@ -262,6 +272,9 @@
   }
   .lang-select:hover  { background: rgba(255,255,255,.14); }
   .lang-select:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+  /* Windows pinta la lista con fondo blanco y hereda el texto blanco del
+     select: sin esto, los idiomas no se ven. */
+  .lang-select option { color: #fff; background: #10202f; }
 
   /* La flechita de abajo: como quitamos la del navegador (appearance:none),
      se dibuja esta a mano. Es solo decorativa (pointer-events:none). */
@@ -378,6 +391,8 @@
   }
   .langmenu__item:hover { background: rgba(255,255,255,.08); }
   .langmenu__item.is-active { color: var(--accent2); font-weight: 700; }
+  /* Birmano y vietnamita: bandera arriba y nombre debajo, en una sola linea. */
+  .langmenu__item--stacked span { display: block; white-space: nowrap; }
 
   .stage {
     flex: 1;
@@ -3614,7 +3629,16 @@
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'langmenu__item' + (code === state.lang ? ' is-active' : '');
-      b.textContent = c.flag + ' ' + c.label;
+      if (code === 'my' || code === 'vi') {
+        b.classList.add('langmenu__item--stacked');
+        [c.flag, c.label].forEach(function (text) {
+          var line = document.createElement('span');
+          line.textContent = text;
+          b.appendChild(line);
+        });
+      } else {
+        b.textContent = c.flag + ' ' + c.label;
+      }
       b.addEventListener('click', function () {
         setLang(code);
         el.langList.hidden = true;

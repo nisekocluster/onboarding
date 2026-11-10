@@ -1,6 +1,6 @@
 # Niseko Village — Onboarding Book
 
-Digital welcome book for the winter team. 44 pages (43 on mobile and tablet),
+Digital welcome book for the winter team. 46 pages (45 on mobile and tablet),
 10 languages.
 
 **Everything is inside `index.html`**: the structure, the styles, the logic and

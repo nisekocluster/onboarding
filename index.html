@@ -521,6 +521,11 @@
     display: block;
   }
 
+  /* Horarios (paginas 29 y 31): la imagen entera, sin recortar nada, estirada
+     lo justo para llegar hasta el borde inferior de la pagina. Se activa con
+     `stretch: true` en SECCION: ESTRUCTURA. */
+  .pg-img--stretch { object-fit: fill; }
+
   .pg-fit {                       /* imagen completa, sin recortar */
     width: 100%;
     height: 100%;
@@ -1057,9 +1062,9 @@
     { n: 26, type: 'split', src: 'p23.jpg', half: 'right', desktopOnly: true },
     { n: 27, type: 'img', src: 'whattobring.jpg' },
     { n: 28, type: 'text', section: 'whatToBring' },
-    { n: 29, type: 'img', src: 'p25.jpg', scroll: true },
+    { n: 29, type: 'img', src: 'p25.jpg', stretch: true },
     { n: 30, type: 'text', eyebrow: 'ch3', title: 'transport', subsection: 'trainTitle' },
-    { n: 31, type: 'img', src: 'p27a.jpg', scroll: true },
+    { n: 31, type: 'img', src: 'p27a.jpg', stretch: true },
     { n: 32, type: 'text', section: 'shuttle' },
     { n: 33, type: 'img', src: 'p29.jpg' },
     { n: 34, type: 'text-img', src: 'nikotto-bus.jpg', section: 'nikotto', imgStyle: { maxWidth: '90%' } },
@@ -3708,6 +3713,9 @@
         var src = (!spread && page.srcMobile) ? page.srcMobile : page.src;
         if (page.scroll) {
           return '<div class="pg-scroll"><img src="img/' + src + '" alt="" loading="lazy" draggable="false"></div>';
+        }
+        if (page.stretch) {
+          return '<img class="pg-img pg-img--stretch" src="img/' + src + '" alt="" loading="lazy" draggable="false">';
         }
         if (page.fit) {
           // Imagen completa, sin recortar (por ejemplo, infografias con

@@ -151,6 +151,7 @@ Extra options:
 |---|---|
 | `cover: true` | The image fills the page even if it has to crop |
 | `scroll: true` | Long image with vertical scrolling (schedules, maps) |
+| `stretch: true` | Whole image, uncropped, stretched to reach the bottom of the page (pages 29 and 31) |
 | `srcMobile: 'x.jpg'` | Uses a different image on mobile and tablet |
 | `desktopOnly: true` | The page only appears in the desktop spread |
 | `imgStyle: { maxWidth: '90%' }` | Extra styles for the image |

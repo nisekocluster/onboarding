@@ -744,27 +744,10 @@
   }
 
   /* Enlace a los horarios de shuttle (pagina 32): tres lineas dentro de un
-     mismo enlace — antetitulo, titulo y descripcion. */
-  .shuttle-link { text-decoration: none; word-break: normal; }
+     mismo enlace, con el mismo estilo de letra que los demas puntos de la
+     lista. */
+  .shuttle-link { word-break: normal; }
   .shuttle-link span { display: block; }
-  .shuttle-link__eyebrow {
-    color: var(--ink-light);
-    font-size: 0.62em;
-    font-weight: 700;
-    letter-spacing: .08em;
-    line-height: 1.5;
-  }
-  .shuttle-link__title {
-    font-size: 1em;
-    font-weight: 700;
-    line-height: 1.35;
-    text-decoration: underline;
-  }
-  .shuttle-link__desc {
-    color: var(--ink);
-    font-size: 0.82em;
-    line-height: 1.4;
-  }
 
   /* enlace en linea: el propio nombre es clicable.
      Sin font-size propio para que encoja con el js-fit. */

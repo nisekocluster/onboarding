@@ -539,6 +539,31 @@
      `stretch: true` en SECCION: ESTRUCTURA. */
   .pg-img--stretch { object-fit: fill; }
 
+  /* Movil/tablet (una sola pagina): la imagen se ve ENTERA, sin recortar.
+     Como la pantalla del movil es mas alargada que la imagen, sobra un poco
+     arriba y abajo; ese hueco se rellena con la misma imagen desenfocada
+     para que no queden franjas en blanco. */
+  .pg-whole {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .pg-whole__bg {
+    position: absolute;
+    inset: -28px;
+    background-size: cover;
+    background-position: center;
+    filter: blur(18px);
+  }
+  .pg-whole img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
   .pg-fit {                       /* imagen completa, sin recortar */
     width: 100%;
     height: 100%;
@@ -3734,6 +3759,13 @@
           // Imagen completa, sin recortar (por ejemplo, infografias con
           // texto donde no se puede perder ni un borde).
           return '<div class="pg-fit"><img src="img/' + src + '" alt="" loading="lazy" draggable="false"></div>';
+        }
+        if (!spread) {
+          // Una sola pagina (movil/tablet): imagen entera, sin recortar.
+          return '<div class="pg-whole">' +
+                   '<div class="pg-whole__bg" style="background-image:url(img/' + src + ')"></div>' +
+                   '<img src="img/' + src + '" alt="" loading="lazy" draggable="false">' +
+                 '</div>';
         }
         return '<img class="pg-img" src="img/' + src + '" alt="" loading="lazy" draggable="false">';
       }
